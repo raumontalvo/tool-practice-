@@ -3,48 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgentHub Admin Panel</title>
+  <title>AgentHub Admin Panel Prototype</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: "class"
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            body: ["Manrope", "sans-serif"],
+            display: ["Sora", "sans-serif"]
+          }
+        }
+      }
     };
   </script>
 </head>
-
-<body class="bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+<body class="font-body bg-stone-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
   <div class="min-h-screen flex">
-    <nav class="hidden md:flex md:flex-col w-64 shrink-0 bg-white border-r border-slate-200 dark:bg-slate-900 dark:border-slate-800">
-      <div class="p-6 border-b border-slate-200 dark:border-slate-800">
-        <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">AgentHub</h1>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Admin Panel</p>
+    <nav aria-label="Primary" class="hidden md:flex md:flex-col w-72 shrink-0 border-r border-stone-200 bg-gradient-to-b from-white to-stone-50 dark:from-slate-900 dark:to-slate-900 dark:border-slate-800">
+      <div class="px-6 py-7 border-b border-stone-200 dark:border-slate-800">
+        <p class="font-display text-2xl tracking-tight text-cyan-700 dark:text-cyan-400">AgentHub</p>
+        <p class="text-sm mt-1 text-slate-500 dark:text-slate-400">AI Agent Rental Admin</p>
       </div>
 
       <div class="p-4 space-y-2">
-        <button data-section="dashboard" class="nav-link w-full text-left px-4 py-3 rounded-xl font-medium">Dashboard</button>
-        <button data-section="users" class="nav-link w-full text-left px-4 py-3 rounded-xl font-medium">User Management</button>
-        <button data-section="agents" class="nav-link w-full text-left px-4 py-3 rounded-xl font-medium">Agent Management</button>
-        <button data-section="skills" class="nav-link w-full text-left px-4 py-3 rounded-xl font-medium">Skills</button>
-        <button data-section="contracts" class="nav-link w-full text-left px-4 py-3 rounded-xl font-medium">Agent Contracts</button>
-        <button data-section="errors" class="nav-link w-full text-left px-4 py-3 rounded-xl font-medium">Error Log</button>
+        <button data-section="dashboard" class="nav-link w-full rounded-xl px-4 py-3 text-left font-semibold transition-colors">Dashboard</button>
+        <button data-section="users" class="nav-link w-full rounded-xl px-4 py-3 text-left font-semibold transition-colors">User Management</button>
+        <button data-section="agents" class="nav-link w-full rounded-xl px-4 py-3 text-left font-semibold transition-colors">Agent Management</button>
+        <button data-section="skills" class="nav-link w-full rounded-xl px-4 py-3 text-left font-semibold transition-colors">Skills</button>
+        <button data-section="contracts" class="nav-link w-full rounded-xl px-4 py-3 text-left font-semibold transition-colors">Agent Contracts</button>
+        <button data-section="errors" class="nav-link w-full rounded-xl px-4 py-3 text-left font-semibold transition-colors">Error Log</button>
       </div>
     </nav>
 
     <main class="flex-1 min-w-0">
-      <header class="bg-white border-b border-slate-200 dark:bg-slate-900 dark:border-slate-800 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h2 id="pageTitle" class="text-2xl font-bold">Dashboard</h2>
-          <p class="text-sm text-slate-500 dark:text-slate-400">Internal platform operations</p>
-        </div>
+      <header class="sticky top-0 z-20 border-b border-stone-200 bg-white/90 px-5 py-4 backdrop-blur md:px-6 dark:border-slate-800 dark:bg-slate-900/90">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 id="pageTitle" class="font-display text-2xl tracking-tight">Dashboard</h1>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Control plane for clients, agents, and operational reliability.</p>
+          </div>
 
-        <button id="themeToggle" class="px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-medium">
-          Toggle Dark Mode
-        </button>
+          <button id="themeToggle" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl border border-stone-300 px-4 py-2 font-semibold transition hover:bg-stone-100 dark:border-slate-700 dark:hover:bg-slate-800">
+            <span id="themeLabel">Switch to Dark</span>
+          </button>
+        </div>
       </header>
 
-      <div class="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4">
-        <select id="mobileNav" class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3">
+      <div class="md:hidden border-b border-stone-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+        <label for="mobileNav" class="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Section</label>
+        <select id="mobileNav" class="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 font-medium dark:border-slate-700 dark:bg-slate-900">
           <option value="dashboard">Dashboard</option>
           <option value="users">User Management</option>
           <option value="agents">Agent Management</option>
@@ -54,330 +68,365 @@
         </select>
       </div>
 
-      <div class="p-6 space-y-6">
+      <div class="p-4 md:p-6 space-y-6">
         <section id="dashboard" class="panel-section space-y-6">
-          <div id="dashboardMetrics" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4"></div>
+          <div id="metricsGrid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"></div>
 
-          <article class="bg-white dark:bg-slate-900 rounded-2xl shadow p-6 border border-slate-200 dark:border-slate-800">
-            <h3 class="text-lg font-bold mb-4">Weekly Activity</h3>
-            <div class="h-72 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl flex items-center justify-center text-slate-500 dark:text-slate-400">
-              Weekly Activity Chart Placeholder
+          <article class="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="flex items-center justify-between gap-4">
+              <h2 class="font-display text-xl tracking-tight">Weekly Activity</h2>
+              <span class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-200">Demo Placeholder</span>
+            </div>
+            <div class="mt-5 h-72 rounded-2xl border-2 border-dashed border-stone-300 bg-gradient-to-br from-cyan-50 via-white to-emerald-50 p-5 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+              <div class="flex h-full items-end gap-3">
+                <div class="h-[45%] w-full rounded-t-lg bg-cyan-200/80 dark:bg-cyan-900" aria-hidden="true"></div>
+                <div class="h-[62%] w-full rounded-t-lg bg-cyan-300/80 dark:bg-cyan-800" aria-hidden="true"></div>
+                <div class="h-[50%] w-full rounded-t-lg bg-cyan-400/80 dark:bg-cyan-700" aria-hidden="true"></div>
+                <div class="h-[76%] w-full rounded-t-lg bg-cyan-500/80 dark:bg-cyan-600" aria-hidden="true"></div>
+                <div class="h-[68%] w-full rounded-t-lg bg-cyan-600/80 dark:bg-cyan-500" aria-hidden="true"></div>
+                <div class="h-[88%] w-full rounded-t-lg bg-cyan-700/80 dark:bg-cyan-400" aria-hidden="true"></div>
+                <div class="h-[72%] w-full rounded-t-lg bg-cyan-800/80 dark:bg-cyan-300" aria-hidden="true"></div>
+              </div>
             </div>
           </article>
         </section>
 
-        <section id="users" class="panel-section hidden space-y-6">
-            <article class="bg-white dark:bg-slate-900 rounded-2xl shadow border border-slate-200 dark:border-slate-800 overflow-hidden">
-              <div class="p-5 border-b border-slate-200 dark:border-slate-800">
-                <h3 class="text-lg font-bold">User Management</h3>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Manage client accounts and subscriptions.</p>
-              </div>
-
-              <div class="overflow-x-auto pb-32">
-                <table class="w-full text-left">
-                  <thead class="bg-slate-50 dark:bg-slate-800">
-                    <tr>
-                      <th class="p-4">Name</th>
-                      <th class="p-4">Email</th>
-                      <th class="p-4">Plan</th>
-                      <th class="p-4">Status</th>
-                      <th class="p-4">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="usersTableBody" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
-                </table>
-              </div>
-            </article>
-        </section>
-
-        <section id="agents" class="panel-section hidden space-y-4">
-          <div id="agentsList" class="space-y-4"></div>
-        </section>
-
-        <section id="skills" class="panel-section hidden space-y-6">
-          <article class="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-2xl p-5">
-            <h3 class="font-bold text-lg">What is a skill?</h3>
-            <p class="text-sm mt-2 text-slate-700 dark:text-slate-300">
-              A skill is a capability that can be attached to an AI agent, such as web browsing, document reading, calendar management, or CRM updating.
-            </p>
-          </article>
-
-          <div id="skillsGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
-        </section>
-
-        <section id="contracts" class="panel-section hidden space-y-6">
-          <article class="bg-white dark:bg-slate-900 rounded-2xl shadow border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
-              <h3 class="text-lg font-bold">Agent Contracts</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Track rented agents, skills, and payment totals.</p>
+        <section id="users" class="panel-section hidden">
+          <article class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="border-b border-stone-200 p-5 dark:border-slate-800">
+              <h2 class="font-display text-xl tracking-tight">User Management</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Client accounts, subscription plans, and lifecycle status.</p>
             </div>
-
             <div class="overflow-x-auto">
               <table class="w-full text-left">
-                <thead class="bg-slate-50 dark:bg-slate-800">
+                <thead class="bg-stone-100 dark:bg-slate-800">
                   <tr>
-                    <th class="p-4">Client</th>
-                    <th class="p-4">Agent</th>
-                    <th class="p-4">Skills</th>
-                    <th class="p-4">Start</th>
-                    <th class="p-4">End</th>
-                    <th class="p-4">Amount</th>
-                    <th class="p-4">Actions</th>
+                    <th scope="col" class="p-4">Name</th>
+                    <th scope="col" class="p-4">Email</th>
+                    <th scope="col" class="p-4">Plan</th>
+                    <th scope="col" class="p-4">Status</th>
+                    <th scope="col" class="p-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody id="contractsTableBody" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
+                <tbody id="usersTableBody" class="divide-y divide-stone-200 dark:divide-slate-800"></tbody>
               </table>
             </div>
           </article>
         </section>
 
-        <section id="errors" class="panel-section hidden space-y-4">
-          <div id="errorsList" class="space-y-4"></div>
+        <section id="agents" class="panel-section hidden">
+          <div id="agentsList" class="space-y-4"></div>
+        </section>
+
+        <section id="skills" class="panel-section hidden space-y-5">
+          <article class="rounded-2xl border border-cyan-200 bg-cyan-50 p-5 dark:border-cyan-900 dark:bg-cyan-950/40">
+            <h2 class="font-display text-xl tracking-tight">What Is A Skill In AgentHub?</h2>
+            <p class="mt-2 max-w-3xl text-sm text-slate-700 dark:text-slate-300">A skill is a reusable capability pack attached to an AI agent, such as web browsing, file summarization, calendar management, or financial reconciliation. Contracts combine skills to define what each rented agent can do for a client.</p>
+          </article>
+          <div id="skillsGrid" class="grid grid-cols-1 gap-4 xl:grid-cols-2"></div>
+        </section>
+
+        <section id="contracts" class="panel-section hidden">
+          <article class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="border-b border-stone-200 p-5 dark:border-slate-800">
+              <h2 class="font-display text-xl tracking-tight">Agent Contracts</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Commercial agreement tracking for rented agents and enabled skills.</p>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead class="bg-stone-100 dark:bg-slate-800">
+                  <tr>
+                    <th scope="col" class="p-4">Client</th>
+                    <th scope="col" class="p-4">Rented Agent</th>
+                    <th scope="col" class="p-4">Contracted Skills</th>
+                    <th scope="col" class="p-4">Start Date</th>
+                    <th scope="col" class="p-4">End Date</th>
+                    <th scope="col" class="p-4">Total Amount Paid</th>
+                    <th scope="col" class="p-4">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="contractsTableBody" class="divide-y divide-stone-200 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section id="errors" class="panel-section hidden">
+          <article class="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="border-b border-stone-200 p-5 dark:border-slate-800">
+              <h2 class="font-display text-xl tracking-tight">Error Log</h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Operational failures, traces, and resolution flow.</p>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left">
+                <thead class="bg-stone-100 dark:bg-slate-800">
+                  <tr>
+                    <th scope="col" class="p-4">Timestamp</th>
+                    <th scope="col" class="p-4">Agent</th>
+                    <th scope="col" class="p-4">Error Type</th>
+                    <th scope="col" class="p-4">Description</th>
+                    <th scope="col" class="p-4">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="errorsTableBody" class="divide-y divide-stone-200 dark:divide-slate-800"></tbody>
+              </table>
+            </div>
+          </article>
         </section>
       </div>
     </main>
   </div>
 
-  <div id="modalBackdrop" class="hidden fixed inset-0 bg-black/60 z-40 flex items-center justify-center p-4">
-    <div id="modalBox" class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 w-full max-w-xl p-6">
+  <div id="modalBackdrop" class="fixed inset-0 z-40 hidden items-center justify-center bg-slate-950/65 p-4">
+    <div id="modalCard" class="w-full max-w-2xl rounded-2xl border border-stone-200 bg-white p-6 shadow-xl dark:border-slate-700 dark:bg-slate-900">
       <div class="flex items-start justify-between gap-4">
-        <h3 id="modalTitle" class="text-xl font-bold">Modal Title</h3>
-        <button id="modalClose" class="text-2xl leading-none">×</button>
+        <h3 id="modalTitle" class="font-display text-2xl tracking-tight">Detail</h3>
+        <button id="closeModalBtn" type="button" class="rounded-lg border border-stone-300 px-3 py-1.5 text-sm font-semibold hover:bg-stone-100 dark:border-slate-700 dark:hover:bg-slate-800">Close</button>
       </div>
-      <div id="modalBody" class="mt-4 text-slate-700 dark:text-slate-300 space-y-2"></div>
+      <div id="modalBody" class="mt-4 space-y-3 text-sm text-slate-700 dark:text-slate-300"></div>
     </div>
   </div>
 
-  <script>
-    const agentHubData = {
-      dashboardMetrics: [
-        { icon: "💰", label: "Monthly Revenue", value: "$48,920", badge: "Revenue", color: "green" },
-        { icon: "🏷️", label: "Discount Losses", value: "$3,410", badge: "Losses", color: "orange" },
-        { icon: "🤖", label: "Active Agents", value: "128", badge: "Active", color: "blue" },
-        { icon: "⚠️", label: "Flagged Agents", value: "7", badge: "Failing", color: "red" }
-      ],
+  <div id="toast" class="fixed right-4 top-4 z-50 hidden rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800 shadow-md dark:border-emerald-900 dark:bg-emerald-950/70 dark:text-emerald-200"></div>
 
+  <script>
+    const appData = {
+      metrics: [
+        { icon: "💵", label: "Total Revenue", value: "$142,880", accent: "Revenue", color: "teal" },
+        { icon: "🏷", label: "Discount Losses", value: "$9,430", accent: "Discount", color: "amber" },
+        { icon: "🤖", label: "Active Agents", value: "38", accent: "Running", color: "emerald" },
+        { icon: "🚨", label: "Failing Agents", value: "4", accent: "Needs Attention", color: "red" }
+      ],
       users: [
         {
           name: "Maya Johnson",
-          email: "maya@northstar.com",
+          email: "maya@northstarlogistics.com",
           plan: "Enterprise",
           status: "Active",
-          color: "green",
+          color: "emerald",
           company: "Northstar Logistics",
-          joined: "Jan 12, 2026",
-          rentedAgents: 12
+          joined: "2025-11-10",
+          rentedAgents: 3,
+          monthlySpend: "$11,400"
         },
         {
-          name: "Carlos Rivera",
-          email: "carlos@brightcrm.com",
-          plan: "Pro",
-          status: "Trial",
-          color: "blue",
-          company: "BrightCRM",
-          joined: "Feb 5, 2026",
-          rentedAgents: 4
-        },
-        {
-          name: "Ava Chen",
-          email: "ava@legalcore.com",
-          plan: "Enterprise",
+          name: "Ethan Ramirez",
+          email: "ethan@novaretail.com",
+          plan: "Growth",
           status: "Active",
-          color: "green",
-          company: "LegalCore",
-          joined: "Mar 2, 2026",
-          rentedAgents: 8
+          color: "emerald",
+          company: "Nova Retail Group",
+          joined: "2026-01-22",
+          rentedAgents: 2,
+          monthlySpend: "$7,900"
         },
         {
-          name: "Noah Brooks",
-          email: "noah@retailwave.com",
-          plan: "Starter",
+          name: "Priya Shah",
+          email: "priya@ledgerworks.ai",
+          plan: "Enterprise",
+          status: "Trial",
+          color: "sky",
+          company: "LedgerWorks",
+          joined: "2026-03-02",
+          rentedAgents: 1,
+          monthlySpend: "$2,600"
+        },
+        {
+          name: "Daniel Brooks",
+          email: "daniel@scoutadvisory.io",
+          plan: "Pro",
           status: "Past Due",
-          color: "yellow",
-          company: "RetailWave",
-          joined: "Feb 22, 2026",
-          rentedAgents: 2
+          color: "amber",
+          company: "Scout Advisory",
+          joined: "2025-12-14",
+          rentedAgents: 1,
+          monthlySpend: "$1,900"
         },
         {
-          name: "Sofia Patel",
-          email: "sofia@meddesk.com",
+          name: "Lina Ortega",
+          email: "lina@atlasventures.co",
           plan: "Pro",
           status: "Suspended",
           color: "red",
-          company: "MedDesk",
-          joined: "Jan 29, 2026",
-          rentedAgents: 3
+          company: "Atlas Ventures",
+          joined: "2025-10-01",
+          rentedAgents: 1,
+          monthlySpend: "$0"
         }
       ],
-
       agents: [
         {
-          name: "SupportBot Pro",
+          name: "Atlas Support Agent",
           owner: "Northstar Logistics",
           status: "Active",
-          color: "green",
-          skills: ["Web Browsing", "Document Reading", "CRM Updating"],
-          prompt: "You are SupportBot Pro. Help customers with fast, clear, and polite support answers. Escalate billing and legal issues."
+          color: "emerald",
+          skills: ["Web Browsing", "File Summarization", "Ticket Classification"],
+          systemPrompt: "You are Atlas Support Agent. Resolve customer requests quickly, summarize previous thread context, and escalate billing disputes with concise handoff notes."
         },
         {
-          name: "CalendarPilot",
-          owner: "BrightCRM",
-          status: "Inactive",
-          color: "gray",
-          skills: ["Calendar Management", "Email Drafting", "Reminder Creation"],
-          prompt: "You are CalendarPilot. Manage scheduling requests, find open time blocks, and create clear meeting summaries."
-        },
-        {
-          name: "DocuMind",
-          owner: "LegalCore",
+          name: "Nova Sales Agent",
+          owner: "Nova Retail Group",
           status: "Active",
-          color: "green",
-          skills: ["Document Reading", "Contract Review", "Summary Generation"],
-          prompt: "You are DocuMind. Read documents, summarize important clauses, and flag unclear language for human review."
+          color: "emerald",
+          skills: ["Lead Qualification", "Calendar Management", "CRM Update Automation"],
+          systemPrompt: "You are Nova Sales Agent. Prioritize high-intent leads, draft outreach summaries, and schedule demos only within approved availability windows."
         },
         {
-          name: "SalesAssist AI",
-          owner: "RetailWave",
+          name: "Ledger Finance Agent",
+          owner: "LedgerWorks",
           status: "Failing",
           color: "red",
-          skills: ["CRM Updating", "Lead Scoring", "Email Drafting"],
-          prompt: "You are SalesAssist AI. Help sales teams qualify leads, update CRM notes, and prepare follow-up messages."
+          skills: ["Document Reading", "Invoice Reconciliation", "Policy Verification"],
+          systemPrompt: "You are Ledger Finance Agent. Audit invoice data, detect mismatched amounts, and provide itemized discrepancy explanations with confidence indicators."
+        },
+        {
+          name: "Scout Research Agent",
+          owner: "Scout Advisory",
+          status: "Inactive",
+          color: "slate",
+          skills: ["Web Browsing", "Market Scan", "Executive Summaries"],
+          systemPrompt: "You are Scout Research Agent. Compile competitive intelligence snapshots, cite source links, and produce compact executive briefings for strategy teams."
         }
       ],
-
       skills: [
         {
           name: "Web Browsing",
-          description: "Allows agents to browse web information.",
-          enabledCount: 18,
-          example: "Research competitor pricing."
+          description: "Visits public websites and extracts relevant findings for task completion.",
+          usedBy: 2,
+          detail: "Used for research, policy lookup, and market intelligence scenarios."
         },
         {
           name: "Document Reading",
-          description: "Reads documents and extracts useful details.",
-          enabledCount: 24,
-          example: "Summarize contracts."
+          description: "Parses files like PDFs and reports to extract facts and structured summaries.",
+          usedBy: 1,
+          detail: "Common for contracts, invoices, and long-form internal documents."
         },
         {
           name: "Calendar Management",
-          description: "Schedules meetings and handles reminders.",
-          enabledCount: 12,
-          example: "Schedule team calls."
+          description: "Finds suitable meeting times, coordinates constraints, and drafts invites.",
+          usedBy: 1,
+          detail: "Supports scheduling across teams while enforcing blackout windows."
         },
         {
-          name: "CRM Updating",
-          description: "Updates customer records and sales notes.",
-          enabledCount: 15,
-          example: "Add lead status after a call."
+          name: "Business Task Automation",
+          description: "Runs repeatable workflows such as record updates and status synchronization.",
+          usedBy: 2,
+          detail: "Improves throughput for CRM updates, ticket routing, and internal ops tasks."
         }
       ],
-
       contracts: [
         {
           client: "Northstar Logistics",
-          agent: "SupportBot Pro",
-          skills: ["Web Browsing", "Document Reading", "CRM Updating"],
-          start: "2026-01-01",
-          end: "2026-12-31",
-          amount: "$14,400",
+          agent: "Atlas Support Agent",
+          skills: ["Web Browsing", "File Summarization", "Ticket Classification"],
+          startDate: "2026-01-01",
+          endDate: "2026-12-31",
+          totalPaid: "$36,000",
           itemized: [
-            { name: "Web Browsing", price: "$4,000" },
-            { name: "Document Reading", price: "$5,200" },
-            { name: "CRM Updating", price: "$5,200" }
+            { skill: "Web Browsing", price: "$11,000" },
+            { skill: "File Summarization", price: "$14,000" },
+            { skill: "Ticket Classification", price: "$11,000" }
           ]
         },
         {
-          client: "BrightCRM",
-          agent: "CalendarPilot",
-          skills: ["Calendar Management", "Email Drafting"],
-          start: "2026-02-01",
-          end: "2026-08-01",
-          amount: "$6,800",
+          client: "Nova Retail Group",
+          agent: "Nova Sales Agent",
+          skills: ["Lead Qualification", "Calendar Management", "CRM Update Automation"],
+          startDate: "2026-02-15",
+          endDate: "2026-11-30",
+          totalPaid: "$28,500",
           itemized: [
-            { name: "Calendar Management", price: "$3,800" },
-            { name: "Email Drafting", price: "$3,000" }
+            { skill: "Lead Qualification", price: "$10,000" },
+            { skill: "Calendar Management", price: "$8,500" },
+            { skill: "CRM Update Automation", price: "$10,000" }
           ]
         },
         {
-          client: "LegalCore",
-          agent: "DocuMind",
-          skills: ["Document Reading", "Contract Review", "Summary Generation"],
-          start: "2026-03-01",
-          end: "2027-03-01",
-          amount: "$18,200",
+          client: "LedgerWorks",
+          agent: "Ledger Finance Agent",
+          skills: ["Document Reading", "Invoice Reconciliation", "Policy Verification"],
+          startDate: "2026-03-01",
+          endDate: "2027-02-28",
+          totalPaid: "$41,300",
           itemized: [
-            { name: "Document Reading", price: "$7,000" },
-            { name: "Contract Review", price: "$8,200" },
-            { name: "Summary Generation", price: "$3,000" }
+            { skill: "Document Reading", price: "$12,000" },
+            { skill: "Invoice Reconciliation", price: "$16,800" },
+            { skill: "Policy Verification", price: "$12,500" }
           ]
         },
         {
-          client: "RetailWave",
-          agent: "SalesAssist AI",
-          skills: ["CRM Updating", "Lead Scoring"],
-          start: "2026-01-15",
-          end: "2026-07-15",
-          amount: "$7,900",
+          client: "Scout Advisory",
+          agent: "Scout Research Agent",
+          skills: ["Web Browsing", "Market Scan", "Executive Summaries"],
+          startDate: "2026-01-20",
+          endDate: "2026-08-20",
+          totalPaid: "$19,700",
           itemized: [
-            { name: "CRM Updating", price: "$3,900" },
-            { name: "Lead Scoring", price: "$4,000" }
+            { skill: "Web Browsing", price: "$6,100" },
+            { skill: "Market Scan", price: "$7,300" },
+            { skill: "Executive Summaries", price: "$6,300" }
           ]
         }
       ],
-
       errors: [
         {
-          timestamp: "2026-04-28 09:15 AM",
-          agent: "SupportBot Pro",
-          type: "API Failure",
-          color: "red",
-          description: "Failed to complete web lookup.",
-          trace: "External browsing request timed out after maximum retry limit."
+          timestamp: "2026-05-02 09:02",
+          agent: "Ledger Finance Agent",
+          type: "Validation Error",
+          severity: "high",
+          description: "Invoice amount mismatch after reconciliation step.",
+          trace: "MismatchException: expected total 18940.75 but received 18904.75 in payable ledger batch 4491.",
+          resolved: false
         },
         {
-          timestamp: "2026-04-28 10:05 AM",
-          agent: "CalendarPilot",
+          timestamp: "2026-05-02 11:26",
+          agent: "Atlas Support Agent",
+          type: "Upstream Timeout",
+          severity: "medium",
+          description: "Knowledge lookup timed out while generating response.",
+          trace: "TimeoutError: vector-search request exceeded 5000ms threshold in region us-east-1.",
+          resolved: false
+        },
+        {
+          timestamp: "2026-05-02 14:44",
+          agent: "Scout Research Agent",
           type: "Permission Error",
-          color: "yellow",
-          description: "Calendar permission token expired.",
-          trace: "Calendar access token expired before meeting sync completed."
+          severity: "low",
+          description: "Browsing target blocked by robots policy.",
+          trace: "PermissionDenied: crawl policy denied path /pricing/intelligence; fallback source required.",
+          resolved: false
         },
         {
-          timestamp: "2026-04-28 11:20 AM",
-          agent: "DocuMind",
-          type: "Skill Timeout",
-          color: "orange",
-          description: "Document parser stopped during upload.",
-          trace: "Document parser exceeded processing time on a large PDF file."
+          timestamp: "2026-05-03 08:17",
+          agent: "Nova Sales Agent",
+          type: "Calendar Sync Failure",
+          severity: "medium",
+          description: "Meeting slot sync failed for one attendee.",
+          trace: "SyncError: provider returned 409 conflict because attendee calendar version is stale.",
+          resolved: false
         },
         {
-          timestamp: "2026-04-28 12:45 PM",
-          agent: "SalesAssist AI",
-          type: "Billing Sync Error",
-          color: "purple",
-          description: "CRM billing sync failed.",
-          trace: "CRM invoice record failed to sync with billing ledger."
+          timestamp: "2026-05-03 12:08",
+          agent: "Ledger Finance Agent",
+          type: "Token Limit",
+          severity: "high",
+          description: "Prompt context exceeded configured token budget.",
+          trace: "ContextOverflow: 18214 tokens provided while max allowed is 16000 for finance-policy profile.",
+          resolved: false
         },
         {
-          timestamp: "2026-04-28 01:30 PM",
-          agent: "DocuMind",
-          type: "Prompt Error",
-          color: "blue",
-          description: "Prompt exceeded configured token limit.",
-          trace: "System prompt plus user document exceeded maximum context limit."
-        },
-        {
-          timestamp: "2026-04-28 02:10 PM",
-          agent: "SupportBot Pro",
-          type: "API Failure",
-          color: "red",
-          description: "Customer handoff failed.",
-          trace: "Support ticket handoff endpoint returned a 500 response."
+          timestamp: "2026-05-03 17:51",
+          agent: "Atlas Support Agent",
+          type: "Routing Error",
+          severity: "low",
+          description: "Escalation route not found for billing queue.",
+          trace: "RouteNotFound: queue key billing-escalation-eu missing in routing map v12.",
+          resolved: false
         }
       ]
     };
 
-    const pageTitles = {
+    const sectionTitles = {
       dashboard: "Dashboard",
       users: "User Management",
       agents: "Agent Management",
@@ -388,49 +437,60 @@
 
     function badgeClass(color) {
       const map = {
-        green: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200",
-        blue: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200",
-        red: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200",
-        yellow: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-200",
-        orange: "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-200",
-        purple: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-200",
-        gray: "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-200"
+        emerald: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200",
+        amber: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200",
+        red: "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-200",
+        sky: "bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-200",
+        teal: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-200",
+        slate: "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-200"
       };
 
-      return map[color] || map.gray;
+      return map[color] || map.slate;
+    }
+
+    function severityBadgeClass(level, resolved) {
+      if (resolved) {
+        return "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-200";
+      }
+
+      const map = {
+        high: "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-200",
+        medium: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200",
+        low: "bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-200"
+      };
+
+      return map[level] || map.low;
     }
 
     function renderDashboard() {
-      const container = document.getElementById("dashboardMetrics");
-
-      container.innerHTML = agentHubData.dashboardMetrics.map((metric) => `
-        <article class="bg-white dark:bg-slate-900 rounded-2xl shadow p-5 border border-slate-200 dark:border-slate-800">
-          <div class="flex items-center justify-between">
-            <span class="text-3xl">${metric.icon}</span>
-            <span class="text-xs font-semibold ${badgeClass(metric.color)} px-2 py-1 rounded-full">${metric.badge}</span>
+      const target = document.getElementById("metricsGrid");
+      target.innerHTML = appData.metrics.map((metric) => `
+        <article class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div class="flex items-center justify-between gap-3">
+            <p class="text-3xl" aria-hidden="true">${metric.icon}</p>
+            <span class="rounded-full px-2.5 py-1 text-xs font-semibold ${badgeClass(metric.color)}">${metric.accent}</span>
           </div>
           <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">${metric.label}</p>
-          <p class="text-3xl font-bold">${metric.value}</p>
+          <p class="mt-1 text-3xl font-extrabold tracking-tight">${metric.value}</p>
         </article>
       `).join("");
     }
 
     function renderUsers() {
-      const tbody = document.getElementById("usersTableBody");
-
-      tbody.innerHTML = agentHubData.users.map((user, index) => `
+      const target = document.getElementById("usersTableBody");
+      target.innerHTML = appData.users.map((user, index) => `
         <tr>
-          <td class="p-4 font-medium whitespace-nowrap">${user.name}</td>
+          <td class="p-4 font-semibold whitespace-nowrap">${user.name}</td>
           <td class="p-4 whitespace-nowrap">${user.email}</td>
           <td class="p-4 whitespace-nowrap">${user.plan}</td>
           <td class="p-4 whitespace-nowrap">
-            <span class="text-xs font-semibold ${badgeClass(user.color)} px-2 py-1 rounded-full">${user.status}</span>
+            <span class="rounded-full px-2.5 py-1 text-xs font-semibold ${badgeClass(user.color)}">${user.status}</span>
           </td>
-          <td class="p-4 relative">
-            <button class="dropdown-btn text-xl">⋮</button>
-            <div class="dropdown-menu hidden absolute right-4 mt-2 w-40 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow z-10">
-              <button class="modal-open block w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700" data-type="user" data-index="${index}">View detail</button>
-              <button class="block w-full text-left px-4 py-2 text-red-600 hover:bg-slate-100 dark:hover:bg-slate-700">Delete</button>
+          <td class="p-4 relative whitespace-nowrap">
+            <button type="button" class="dropdown-btn rounded-lg px-2 py-1 text-lg leading-none hover:bg-stone-100 dark:hover:bg-slate-800" aria-label="Open user actions">⋮</button>
+            <div class="dropdown-menu absolute right-4 mt-2 hidden w-40 rounded-xl border border-stone-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800">
+              <button type="button" class="menu-item block w-full px-4 py-2 text-left hover:bg-stone-100 dark:hover:bg-slate-700" data-action="view-user" data-index="${index}">View detail</button>
+              <button type="button" class="menu-item block w-full px-4 py-2 text-left text-rose-600 hover:bg-stone-100 dark:hover:bg-slate-700" data-action="delete-user" data-index="${index}">Delete</button>
             </div>
           </td>
         </tr>
@@ -438,67 +498,66 @@
     }
 
     function renderAgents() {
-      const container = document.getElementById("agentsList");
-
-      container.innerHTML = agentHubData.agents.map((agent, index) => `
-        <article class="bg-white dark:bg-slate-900 rounded-2xl shadow border border-slate-200 dark:border-slate-800 p-5">
-          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      const target = document.getElementById("agentsList");
+      target.innerHTML = appData.agents.map((agent, index) => `
+        <article class="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h3 class="text-lg font-bold">${agent.name}</h3>
+              <h3 class="font-display text-xl tracking-tight">${agent.name}</h3>
               <p class="text-sm text-slate-500 dark:text-slate-400">Owner: ${agent.owner}</p>
-              <span class="inline-block mt-2 text-xs font-semibold ${badgeClass(agent.color)} px-2 py-1 rounded-full">${agent.status}</span>
+              <span class="mt-2 inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${badgeClass(agent.color)}">${agent.status}</span>
             </div>
 
-            <div class="flex items-center gap-3 relative">
-              <button class="skill-toggle px-4 py-2 rounded-xl bg-blue-600 text-white" data-index="${index}">Show Skills</button>
-              <button class="dropdown-btn text-xl">⋮</button>
-              <div class="dropdown-menu hidden absolute right-0 top-10 w-40 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow z-10">
-                <button class="modal-open block w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700" data-type="agent" data-index="${index}">Configure</button>
-                <button class="block w-full text-left px-4 py-2 text-red-600 hover:bg-slate-100 dark:hover:bg-slate-700">Delete</button>
+            <div class="relative flex items-center gap-3">
+              <button type="button" class="skill-toggle rounded-xl bg-cyan-700 px-4 py-2 text-sm font-semibold text-white hover:bg-cyan-800" data-index="${index}">Show skills</button>
+              <button type="button" class="dropdown-btn rounded-lg px-2 py-1 text-lg leading-none hover:bg-stone-100 dark:hover:bg-slate-800" aria-label="Open agent actions">⋮</button>
+              <div class="dropdown-menu absolute right-0 top-10 hidden w-40 rounded-xl border border-stone-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800">
+                <button type="button" class="menu-item block w-full px-4 py-2 text-left hover:bg-stone-100 dark:hover:bg-slate-700" data-action="configure-agent" data-index="${index}">Configure</button>
+                <button type="button" class="menu-item block w-full px-4 py-2 text-left text-rose-600 hover:bg-stone-100 dark:hover:bg-slate-700" data-action="delete-agent" data-index="${index}">Delete</button>
               </div>
             </div>
           </div>
 
-          <div id="agentSkills-${index}" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out border-t border-slate-200 dark:border-slate-800 mt-0">
-            <p class="pt-4 text-sm">Skills: ${agent.skills.join(", ")}</p>
+          <div id="skillList-${index}" class="max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out">
+            <ul class="mt-4 list-disc space-y-1 border-t border-stone-200 pt-4 pl-5 text-sm dark:border-slate-800">
+              ${agent.skills.map((skill) => `<li>${skill}</li>`).join("")}
+            </ul>
           </div>
         </article>
       `).join("");
     }
 
     function renderSkills() {
-      const container = document.getElementById("skillsGrid");
-
-      container.innerHTML = agentHubData.skills.map((skill, index) => `
-        <article class="bg-white dark:bg-slate-900 rounded-2xl shadow border border-slate-200 dark:border-slate-800 p-5 relative">
-          <button class="dropdown-btn absolute right-5 top-5 text-xl">⋮</button>
-          <div class="dropdown-menu hidden absolute right-5 top-12 w-40 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow z-10">
-            <button class="modal-open block w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700" data-type="skill" data-index="${index}">View detail</button>
-            <button class="block w-full text-left px-4 py-2 text-red-600 hover:bg-slate-100 dark:hover:bg-slate-700">Delete</button>
+      const target = document.getElementById("skillsGrid");
+      target.innerHTML = appData.skills.map((skill, index) => `
+        <article class="relative rounded-2xl border border-stone-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <button type="button" class="dropdown-btn absolute right-4 top-4 rounded-lg px-2 py-1 text-lg leading-none hover:bg-stone-100 dark:hover:bg-slate-800" aria-label="Open skill actions">⋮</button>
+          <div class="dropdown-menu absolute right-4 top-12 hidden w-40 rounded-xl border border-stone-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800">
+            <button type="button" class="menu-item block w-full px-4 py-2 text-left hover:bg-stone-100 dark:hover:bg-slate-700" data-action="view-skill" data-index="${index}">View detail</button>
+            <button type="button" class="menu-item block w-full px-4 py-2 text-left text-rose-600 hover:bg-stone-100 dark:hover:bg-slate-700" data-action="delete-skill" data-index="${index}">Delete</button>
           </div>
 
-          <h3 class="font-bold text-lg">${skill.name}</h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">${skill.description}</p>
-          <p class="mt-4 font-semibold">${skill.enabledCount} agents enabled</p>
+          <h3 class="font-display text-xl tracking-tight">${skill.name}</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">${skill.description}</p>
+          <p class="mt-4 text-sm font-semibold text-cyan-700 dark:text-cyan-300">Used by ${skill.usedBy} agents</p>
         </article>
       `).join("");
     }
 
     function renderContracts() {
-      const tbody = document.getElementById("contractsTableBody");
-
-      tbody.innerHTML = agentHubData.contracts.map((contract, index) => `
+      const target = document.getElementById("contractsTableBody");
+      target.innerHTML = appData.contracts.map((contract, index) => `
         <tr>
           <td class="p-4 whitespace-nowrap">${contract.client}</td>
-          <td class="p-4 font-medium whitespace-nowrap">${contract.agent}</td>
+          <td class="p-4 font-semibold whitespace-nowrap">${contract.agent}</td>
           <td class="p-4">${contract.skills.join(", ")}</td>
-          <td class="p-4 whitespace-nowrap">${contract.start}</td>
-          <td class="p-4 whitespace-nowrap">${contract.end}</td>
-          <td class="p-4 whitespace-nowrap">${contract.amount}</td>
-          <td class="p-4 relative">
-            <button class="dropdown-btn text-xl">⋮</button>
-            <div class="dropdown-menu hidden absolute right-4 mt-2 w-40 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow z-10">
-              <button class="modal-open block w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700" data-type="contract" data-index="${index}">View detail</button>
+          <td class="p-4 whitespace-nowrap">${contract.startDate}</td>
+          <td class="p-4 whitespace-nowrap">${contract.endDate}</td>
+          <td class="p-4 whitespace-nowrap">${contract.totalPaid}</td>
+          <td class="p-4 relative whitespace-nowrap">
+            <button type="button" class="dropdown-btn rounded-lg px-2 py-1 text-lg leading-none hover:bg-stone-100 dark:hover:bg-slate-800" aria-label="Open contract actions">⋮</button>
+            <div class="dropdown-menu absolute right-4 mt-2 hidden w-40 rounded-xl border border-stone-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800">
+              <button type="button" class="menu-item block w-full px-4 py-2 text-left hover:bg-stone-100 dark:hover:bg-slate-700" data-action="view-contract" data-index="${index}">View detail</button>
             </div>
           </td>
         </tr>
@@ -506,43 +565,29 @@
     }
 
     function renderErrors() {
-      const container = document.getElementById("errorsList");
+      const target = document.getElementById("errorsTableBody");
+      target.innerHTML = appData.errors.map((error, index) => {
+        const typeLabel = error.resolved ? "Resolved" : error.type;
+        const rowClass = error.resolved ? "opacity-70" : "";
 
-      container.innerHTML = agentHubData.errors.map((error, index) => `
-        <article class="bg-white dark:bg-slate-900 rounded-2xl shadow border border-slate-200 dark:border-slate-800 p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div>
-            <p class="font-bold">${error.timestamp} — ${error.agent}</p>
-            <p class="text-sm text-slate-500 dark:text-slate-400">${error.description}</p>
-            <span class="inline-block mt-2 text-xs font-semibold ${badgeClass(error.color)} px-2 py-1 rounded-full">${error.type}</span>
-          </div>
-
-          <div class="relative">
-            <button class="dropdown-btn text-xl">⋮</button>
-            <div class="dropdown-menu hidden absolute right-0 mt-2 w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow z-10">
-              <button class="modal-open block w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700" data-type="error" data-index="${index}">View detail</button>
-              <button class="block w-full text-left px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700">Mark as resolved</button>
-            </div>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function showSection(sectionId) {
-      document.querySelectorAll(".panel-section").forEach((section) => {
-        section.classList.toggle("hidden", section.id !== sectionId);
-      });
-
-      document.querySelectorAll(".nav-link").forEach((link) => {
-        const active = link.dataset.section === sectionId;
-
-        link.classList.toggle("bg-blue-600", active);
-        link.classList.toggle("text-white", active);
-        link.classList.toggle("hover:bg-slate-100", !active);
-        link.classList.toggle("dark:hover:bg-slate-800", !active);
-      });
-
-      document.getElementById("pageTitle").textContent = pageTitles[sectionId];
-      document.getElementById("mobileNav").value = sectionId;
+        return `
+          <tr class="${rowClass}">
+            <td class="p-4 whitespace-nowrap">${error.timestamp}</td>
+            <td class="p-4 font-semibold whitespace-nowrap">${error.agent}</td>
+            <td class="p-4 whitespace-nowrap">
+              <span class="rounded-full px-2.5 py-1 text-xs font-semibold ${severityBadgeClass(error.severity, error.resolved)}">${typeLabel}</span>
+            </td>
+            <td class="p-4">${error.description}</td>
+            <td class="p-4 relative whitespace-nowrap">
+              <button type="button" class="dropdown-btn rounded-lg px-2 py-1 text-lg leading-none hover:bg-stone-100 dark:hover:bg-slate-800" aria-label="Open error actions">⋮</button>
+              <div class="dropdown-menu absolute right-4 mt-2 hidden w-44 rounded-xl border border-stone-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800">
+                <button type="button" class="menu-item block w-full px-4 py-2 text-left hover:bg-stone-100 dark:hover:bg-slate-700" data-action="view-error" data-index="${index}">View detail</button>
+                <button type="button" class="menu-item block w-full px-4 py-2 text-left hover:bg-stone-100 dark:hover:bg-slate-700" data-action="resolve-error" data-index="${index}">Mark as resolved</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
     }
 
     function closeDropdowns() {
@@ -551,161 +596,257 @@
       });
     }
 
-    function openModal(title, bodyHtml) {
+    function setActiveSection(sectionId) {
+      document.querySelectorAll(".panel-section").forEach((section) => {
+        section.classList.toggle("hidden", section.id !== sectionId);
+      });
+
+      document.querySelectorAll(".nav-link").forEach((button) => {
+        const isActive = button.dataset.section === sectionId;
+        button.classList.toggle("bg-cyan-700", isActive);
+        button.classList.toggle("text-white", isActive);
+        button.classList.toggle("dark:bg-cyan-600", isActive);
+
+        button.classList.toggle("text-slate-700", !isActive);
+        button.classList.toggle("dark:text-slate-200", !isActive);
+        button.classList.toggle("hover:bg-stone-100", !isActive);
+        button.classList.toggle("dark:hover:bg-slate-800", !isActive);
+      });
+
+      document.getElementById("pageTitle").textContent = sectionTitles[sectionId];
+      document.getElementById("mobileNav").value = sectionId;
+      closeDropdowns();
+    }
+
+    function openModal(title, contentHtml) {
       document.getElementById("modalTitle").textContent = title;
-      document.getElementById("modalBody").innerHTML = bodyHtml;
+      document.getElementById("modalBody").innerHTML = contentHtml;
       document.getElementById("modalBackdrop").classList.remove("hidden");
+      document.getElementById("modalBackdrop").classList.add("flex");
     }
 
     function closeModal() {
       document.getElementById("modalBackdrop").classList.add("hidden");
+      document.getElementById("modalBackdrop").classList.remove("flex");
     }
 
-    function buildModalContent(type, index) {
-      if (type === "user") {
-        const user = agentHubData.users[index];
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.remove("hidden");
 
-        return {
-          title: "User Detail",
-          body: `
-            <p><strong>Name:</strong> ${user.name}</p>
-            <p><strong>Email:</strong> ${user.email}</p>
-            <p><strong>Plan:</strong> ${user.plan}</p>
-            <p><strong>Status:</strong> ${user.status}</p>
-            <p><strong>Company:</strong> ${user.company}</p>
-            <p><strong>Joined:</strong> ${user.joined}</p>
-            <p><strong>Rented Agents:</strong> ${user.rentedAgents}</p>
-          `
-        };
-      }
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 1800);
+    }
 
-      if (type === "agent") {
-        const agent = agentHubData.agents[index];
-
-        return {
-          title: "Configure Agent",
-          body: `
-            <p><strong>Agent:</strong> ${agent.name}</p>
-            <p><strong>Owner:</strong> ${agent.owner}</p>
-            <p><strong>Status:</strong> ${agent.status}</p>
-            <label class="block mt-4 font-semibold" for="agentPrompt">System Prompt</label>
-            <textarea id="agentPrompt" class="mt-2 w-full min-h-40 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 p-4">${agent.prompt}</textarea>
-          `
-        };
-      }
-
-      if (type === "skill") {
-        const skill = agentHubData.skills[index];
-
-        return {
-          title: "Skill Detail",
-          body: `
-            <p><strong>Name:</strong> ${skill.name}</p>
-            <p><strong>Description:</strong> ${skill.description}</p>
-            <p><strong>Enabled Agents:</strong> ${skill.enabledCount}</p>
-            <p><strong>Example Use Case:</strong> ${skill.example}</p>
-          `
-        };
-      }
-
-      if (type === "contract") {
-        const contract = agentHubData.contracts[index];
-        const items = contract.itemized.map((item) => `<li>${item.name}: ${item.price}</li>`).join("");
-
-        return {
-          title: "Contract Detail",
-          body: `
-            <p><strong>Client:</strong> ${contract.client}</p>
-            <p><strong>Agent:</strong> ${contract.agent}</p>
-            <p><strong>Start Date:</strong> ${contract.start}</p>
-            <p><strong>End Date:</strong> ${contract.end}</p>
-            <p><strong>Itemized Skills:</strong></p>
-            <ul class="list-disc pl-6">${items}</ul>
-            <p><strong>Total:</strong> ${contract.amount}</p>
-          `
-        };
-      }
-
-      if (type === "error") {
-        const error = agentHubData.errors[index];
-
-        return {
-          title: "Error Trace",
-          body: `
-            <p><strong>Timestamp:</strong> ${error.timestamp}</p>
-            <p><strong>Agent:</strong> ${error.agent}</p>
-            <p><strong>Error Type:</strong> ${error.type}</p>
-            <p><strong>Description:</strong> ${error.description}</p>
-            <p><strong>Trace:</strong> ${error.trace}</p>
-          `
-        };
-      }
-
+    function userModal(index) {
+      const user = appData.users[index];
       return {
-        title: "Detail",
-        body: "<p>No details available.</p>"
+        title: "User Detail",
+        html: `
+          <p><strong>Name:</strong> ${user.name}</p>
+          <p><strong>Email:</strong> ${user.email}</p>
+          <p><strong>Company:</strong> ${user.company}</p>
+          <p><strong>Plan:</strong> ${user.plan}</p>
+          <p><strong>Status:</strong> ${user.status}</p>
+          <p><strong>Joined:</strong> ${user.joined}</p>
+          <p><strong>Rented Agents:</strong> ${user.rentedAgents}</p>
+          <p><strong>Monthly Spend:</strong> ${user.monthlySpend}</p>
+        `
       };
     }
 
-    function setupEvents() {
-      document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          showSection(link.dataset.section);
-        });
+    function agentModal(index) {
+      const agent = appData.agents[index];
+      return {
+        title: "Configure Agent",
+        html: `
+          <p><strong>Agent:</strong> ${agent.name}</p>
+          <p><strong>Owner:</strong> ${agent.owner}</p>
+          <p><strong>Status:</strong> ${agent.status}</p>
+          <label for="systemPrompt" class="mt-3 block font-semibold">System Prompt</label>
+          <textarea id="systemPrompt" class="mt-2 min-h-40 w-full rounded-xl border border-stone-300 bg-white p-3 dark:border-slate-700 dark:bg-slate-950">${agent.systemPrompt}</textarea>
+          <button type="button" class="menu-item mt-3 rounded-xl bg-cyan-700 px-4 py-2 text-sm font-semibold text-white hover:bg-cyan-800" data-action="save-prompt" data-index="${index}">Save Prompt (Demo)</button>
+        `
+      };
+    }
+
+    function skillModal(index) {
+      const skill = appData.skills[index];
+      return {
+        title: "Skill Detail",
+        html: `
+          <p><strong>Name:</strong> ${skill.name}</p>
+          <p><strong>Description:</strong> ${skill.description}</p>
+          <p><strong>Agents Using It:</strong> ${skill.usedBy}</p>
+          <p><strong>Detail:</strong> ${skill.detail}</p>
+        `
+      };
+    }
+
+    function contractModal(index) {
+      const contract = appData.contracts[index];
+      const items = contract.itemized
+        .map((item) => `<li class="flex items-center justify-between"><span>${item.skill}</span><span class="font-semibold">${item.price}</span></li>`)
+        .join("");
+
+      return {
+        title: "Contract Detail",
+        html: `
+          <p><strong>Client:</strong> ${contract.client}</p>
+          <p><strong>Rented Agent:</strong> ${contract.agent}</p>
+          <p><strong>Contracted Skills:</strong> ${contract.skills.join(", ")}</p>
+          <p><strong>Start Date:</strong> ${contract.startDate}</p>
+          <p><strong>End Date:</strong> ${contract.endDate}</p>
+          <p class="font-semibold mt-2">Itemized Skill Prices</p>
+          <ul class="space-y-2 rounded-xl border border-stone-200 p-3 dark:border-slate-700">${items}</ul>
+          <p class="pt-2 text-base"><strong>Total Amount Paid:</strong> ${contract.totalPaid}</p>
+        `
+      };
+    }
+
+    function errorModal(index) {
+      const error = appData.errors[index];
+      return {
+        title: "Error Trace Detail",
+        html: `
+          <p><strong>Timestamp:</strong> ${error.timestamp}</p>
+          <p><strong>Agent:</strong> ${error.agent}</p>
+          <p><strong>Error Type:</strong> ${error.type}</p>
+          <p><strong>Short Description:</strong> ${error.description}</p>
+          <p><strong>Trace:</strong></p>
+          <pre class="overflow-x-auto rounded-xl border border-stone-200 bg-stone-50 p-3 text-xs dark:border-slate-700 dark:bg-slate-950">${error.trace}</pre>
+        `
+      };
+    }
+
+    function handleMenuAction(action, index) {
+      switch (action) {
+        case "view-user": {
+          const modal = userModal(index);
+          openModal(modal.title, modal.html);
+          break;
+        }
+        case "delete-user": {
+          showToast("Delete clicked for user (demo action).");
+          break;
+        }
+        case "configure-agent": {
+          const modal = agentModal(index);
+          openModal(modal.title, modal.html);
+          break;
+        }
+        case "delete-agent": {
+          showToast("Delete clicked for agent (demo action).");
+          break;
+        }
+        case "view-skill": {
+          const modal = skillModal(index);
+          openModal(modal.title, modal.html);
+          break;
+        }
+        case "delete-skill": {
+          showToast("Delete clicked for skill (demo action).");
+          break;
+        }
+        case "view-contract": {
+          const modal = contractModal(index);
+          openModal(modal.title, modal.html);
+          break;
+        }
+        case "view-error": {
+          const modal = errorModal(index);
+          openModal(modal.title, modal.html);
+          break;
+        }
+        case "resolve-error": {
+          if (!appData.errors[index].resolved) {
+            appData.errors[index].resolved = true;
+            renderErrors();
+            showToast("Error marked as resolved.");
+          } else {
+            showToast("Error is already resolved.");
+          }
+          break;
+        }
+        case "save-prompt": {
+          showToast("Prompt saved (demo action).");
+          break;
+        }
+        default:
+          break;
+      }
+    }
+
+    function applySavedTheme() {
+      const saved = localStorage.getItem("agenthub-theme");
+      if (saved === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      document.getElementById("themeLabel").textContent = document.documentElement.classList.contains("dark") ? "Switch to Light" : "Switch to Dark";
+    }
+
+    function bindEvents() {
+      document.querySelectorAll(".nav-link").forEach((btn) => {
+        btn.addEventListener("click", () => setActiveSection(btn.dataset.section));
       });
 
       document.getElementById("mobileNav").addEventListener("change", (event) => {
-        showSection(event.target.value);
+        setActiveSection(event.target.value);
       });
 
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+        const isDark = document.documentElement.classList.contains("dark");
+        localStorage.setItem("agenthub-theme", isDark ? "dark" : "light");
+        document.getElementById("themeLabel").textContent = isDark ? "Switch to Light" : "Switch to Dark";
+      });
+
+      document.getElementById("closeModalBtn").addEventListener("click", closeModal);
+      document.getElementById("modalBackdrop").addEventListener("click", closeModal);
+      document.getElementById("modalCard").addEventListener("click", (event) => event.stopPropagation());
+
       document.addEventListener("click", (event) => {
-        const dropdownButton = event.target.closest(".dropdown-btn");
-        const modalButton = event.target.closest(".modal-open");
-        const skillButton = event.target.closest(".skill-toggle");
+        const dropdownBtn = event.target.closest(".dropdown-btn");
+        const menuItem = event.target.closest(".menu-item");
+        const skillToggle = event.target.closest(".skill-toggle");
 
-        if (dropdownButton) {
+        if (dropdownBtn) {
           event.stopPropagation();
-
-          const menu = dropdownButton.parentElement.querySelector(".dropdown-menu");
-          const wasHidden = menu.classList.contains("hidden");
-
+          const menu = dropdownBtn.parentElement.querySelector(".dropdown-menu");
+          const willOpen = menu.classList.contains("hidden");
           closeDropdowns();
-
-          if (wasHidden) {
+          if (willOpen) {
             menu.classList.remove("hidden");
           }
-
           return;
         }
 
-        if (modalButton) {
+        if (menuItem) {
           event.stopPropagation();
-
-          const detail = buildModalContent(modalButton.dataset.type, Number(modalButton.dataset.index));
-
+          const action = menuItem.dataset.action;
+          const index = Number(menuItem.dataset.index || -1);
           closeDropdowns();
-          openModal(detail.title, detail.body);
-
+          handleMenuAction(action, index);
           return;
         }
 
-        if (skillButton) {
+        if (skillToggle) {
           event.stopPropagation();
-
-          const index = skillButton.dataset.index;
-          const list = document.getElementById(`agentSkills-${index}`);
+          const index = skillToggle.dataset.index;
+          const list = document.getElementById(`skillList-${index}`);
           const isOpen = list.classList.contains("max-h-40");
 
           list.classList.toggle("max-h-0", isOpen);
           list.classList.toggle("opacity-0", isOpen);
-          list.classList.toggle("mt-0", isOpen);
-
           list.classList.toggle("max-h-40", !isOpen);
           list.classList.toggle("opacity-100", !isOpen);
-          list.classList.toggle("mt-4", !isOpen);
 
-          skillButton.textContent = isOpen ? "Show Skills" : "Hide Skills";
-
+          skillToggle.textContent = isOpen ? "Show skills" : "Hide skills";
           return;
         }
 
@@ -713,46 +854,18 @@
           closeDropdowns();
         }
       });
-
-      document.getElementById("modalClose").addEventListener("click", closeModal);
-
-      document.getElementById("modalBackdrop").addEventListener("click", closeModal);
-
-      document.getElementById("modalBox").addEventListener("click", (event) => {
-        event.stopPropagation();
-      });
-
-      document.getElementById("themeToggle").addEventListener("click", () => {
-        document.documentElement.classList.toggle("dark");
-
-        const isDark = document.documentElement.classList.contains("dark");
-        localStorage.setItem("agenthub-theme", isDark ? "dark" : "light");
-      });
-    }
-
-    function applySavedTheme() {
-      const savedTheme = localStorage.getItem("agenthub-theme");
-
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
     }
 
     function initialize() {
       applySavedTheme();
-
       renderDashboard();
       renderUsers();
       renderAgents();
       renderSkills();
       renderContracts();
       renderErrors();
-
-      setupEvents();
-
-      showSection("dashboard");
+      bindEvents();
+      setActiveSection("dashboard");
     }
 
     document.addEventListener("DOMContentLoaded", initialize);
